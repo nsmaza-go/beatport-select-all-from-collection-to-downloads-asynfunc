@@ -12,6 +12,9 @@ Detects and clicks the "Next" button to advance to the next page
 Waits for the new page to load before continuing
 Stops automatically when it reaches the final page
 
+The Code
+The full script can be found in selectAllTracks.js
+
 How to Use It
 Navigate to your Beatport downloads page
 Open your browser's developer console (F12 → Console)
