@@ -1,2 +1,2 @@
-# beatport-select-all-tool
-Tool which enables you to put all songs in your collection into your downloads in one function.
+# beatport-select-all-from-collections-to-downloads-asynfunc
+As a Beatport customer, I had once bought songs from them and was able to add all songs directly after purchase right into my downloads so that I could then download the songs. I ended up mistakenly deleting those files from my computer and found myself having to select each song from my downloads one by one. When you have 10 or 20 songs that may be fine, but I had over 150 songs and if you made an error on one page it would have you start from the beginning again. I decided to do something about it and created this self-invoking asyn function which goes through each page of your collection and automatically adds them to your downloads. Once it reaches the final page does not change, it now knows it is done and your function ceases to continue.
