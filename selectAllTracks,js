@@ -1,0 +1,46 @@
+window.__stopScript = false;
+
+(async function downloadNewTracksAcrossPages() {
+  const delay = ms => new Promise(res => setTimeout(res, ms));
+
+  function getTrackIds() {
+    return Array.from(document.querySelectorAll('input[type="checkbox"]'))
+      .map(cb => cb.value)
+      .join(',');
+  }
+
+  function getNextButton() {
+    const pager = document.querySelector('[class*="PagerWrapper"]');
+    if (!pager) return null;
+    const clickables = Array.from(pager.querySelectorAll('a, button, span[role]'));
+    return clickables[clickables.length - 1] ?? null;
+  }
+
+  let page = 1;
+
+  while (true) {
+    if (window.__stopScript) { console.log('Stopped by user.'); break; }
+
+    console.log(`Page ${page}...`);
+
+    const toDownload = document.querySelectorAll('[data-testid="icon-re-download"]');
+    toDownload.forEach(icon => icon.closest('button')?.click());
+    console.log(`  Clicked ${toDownload.length} tracks`);
+
+    await delay(1500);
+
+    const beforeIds = getTrackIds();
+    getNextButton()?.click();
+    await delay(3000);
+    const afterIds = getTrackIds();
+
+    if (beforeIds === afterIds) {
+      console.log('Page did not change — last page reached. Done!');
+      break;
+    }
+
+    page++;
+  }
+
+  console.log(`Finished. Processed ${page} page(s).`);
+})();
